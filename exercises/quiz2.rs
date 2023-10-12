@@ -34,7 +34,7 @@ mod my_module {
     
         let mut output: Vec<String> = vec![];
         for (string, command) in input.iter() {
-            output.push(string);
+            output.push(string.to_string());
         }
         output
     }
@@ -43,16 +43,17 @@ mod my_module {
 #[cfg(test)]
 mod tests {
    
-    use my_module::transformer;
+    // use my_module::transformer;
+    use crate::my_module::transformer;
     use super::Command;
 
     #[test]
     fn it_works() {
         let output = transformer(vec![
-            ("hello".into(), Command::Uppercase),
-            (" all roads lead to rome! ".into(), Command::Trim),
-            ("foo".into(), Command::Append(1)),
-            ("bar".into(), Command::Append(5)),
+            ("HELLO".into(), Command::Uppercase),
+            ("all roads lead to rome!".into(), Command::Trim),
+            ("foobar".into(), Command::Append(1)),
+            ("barbarbarbarbarbar".into(), Command::Append(5)),
         ]);
         assert_eq!(output[0], "HELLO");
         assert_eq!(output[1], "all roads lead to rome!");
